@@ -1,9 +1,13 @@
 import express from 'express';
 import cors from "cors";
+import cookieParser from 'cookie-parser';
+
 import authRoute from "./routes/authRoute.js"
+import userRoute from "./routes/userRoute.js"
+
 import dotenv from "dotenv"
 import { connectDB } from "./config/db.js"
-import cookieParser from 'cookie-parser';
+
 
 dotenv.config();
 
@@ -16,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));  // I am parsing form data(urle
 app.use(cookieParser());
 
 app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
 
 
 connectDB().then(()=>{

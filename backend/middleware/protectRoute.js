@@ -1,5 +1,5 @@
 import User from "../models/userModel.js";
-
+import jwt from "jsonwebtoken";
 
 export const protectRoute = async (req, res, next) => {
     try {
@@ -10,7 +10,7 @@ export const protectRoute = async (req, res, next) => {
             })
         }
 
-        const decoded = jwt.verify(token, process.env.JWT_TOKEN);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         if(!decoded){
             return res.status(401).json({
